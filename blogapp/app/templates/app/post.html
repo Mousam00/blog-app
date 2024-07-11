@@ -78,6 +78,7 @@
                   </div>
                 </div>
               </div>
+              {% for comment in comments %}
               <!-- comments -->
               <div class="user-comment">
                 <div class="author">
@@ -85,14 +86,14 @@
                     <img src="../images/author.svg" alt="" />
                   </div>
                   <div class="details">
-                    <p>Author name</p>
-                    <small>June 20, 2022</small>
+                    <p>{{comment.name}}</p>
+                    <small>{{comment.date|date}}</small>
                   </div>
                 </div>
                 <div class="comment-sec-main">
                   <div class="comment-sec">
                     <div class="comment">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magnam minima harum, dignissimos ipsa vero sequi ipsam, distinctio quisquam quo cupiditate sed recusandae expedita quod iste maiores rerum. Eaque, dignissimos.</p>
+                      <p>{{comment.content}}</p>
                     </div>
                     <div class="reply">
                       <button onclick="toggleDiv(this)">Reply</button>
@@ -132,6 +133,7 @@
                 </div>
               </div>
               <!-- user comment -->
+              {% endfor %}
             </div>
           </div>
           <div class="comment-box">
