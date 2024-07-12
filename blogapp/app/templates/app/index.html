@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Blog | welcome{% endblock title %}
 {% block content %}
 <main class="sp">
@@ -16,10 +17,11 @@
       </div>
       <div class="newsletter">
         <form method="POST">
-          <input type="email" name="email" maxlength="100" placeholder="Enter your email" required="" id="id_email" />
+          {% csrf_token %}
+          {{subscribe_form}}
           <button class="btn btn-primary">Subscribe</button>
         </form>
-      </div>
+      </div> 
     </center>
   </div>
 </main>
@@ -44,19 +46,19 @@
   <div class="container">
     <h1 class="sec-title">Top blogs</h1>
     <div class="grid-3">
-        {% for post in posts %}
+        {% for post in top_posts %}
       <!-- card -->
       <a href={% url "post_page" post.slug %}>
         <div class="card">
           <div class="post-img">
             <img src={{post.image.url}} alt="" />
-            <div class="tag">tags</div>
+            <div class="tag">{{post.tags.all.0.name}}</div>
           </div>
           <div class="card-content">
             <h3>{{post.title}}</h3>
             <div class="author">
               <div class="profile-pic">
-                <img src="images/author.svg" alt="" />
+                <img src="{% static 'images/author.svg' %}" alt="" />
               </div>
               <div class="details">
                 <p>Author name</p>
@@ -79,19 +81,19 @@
   <div class="container">
     <h1 class="sec-title">New blogs</h1>
     <div class="grid-3">
-        {% for post in posts %}
+        {% for post in recent_posts %}
       <!-- card -->
       <a href={% url "post_page" post.slug %}>
         <div class="card">
           <div class="post-img">
             <img src={{post.image.url}} alt="" />
-            <div class="tag">Tag name</div>
+            <div class="tag">{{post.tags.all.0.name}}</div>
           </div>
           <div class="card-content">
             <h3>{{post.title}}</h3>
             <div class="author">
               <div class="profile-pic">
-                <img src="images/author.svg" alt="" />
+                <img src="{% static 'images/author.svg' %}" alt="" />
               </div>
               <div class="details">
                 <p>Author name</p>
