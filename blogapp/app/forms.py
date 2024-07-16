@@ -1,5 +1,6 @@
 from django import forms
 from app.models import Comments,Subscribe
+from django.utils.translation import gettext_lazy as __
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -17,3 +18,9 @@ class SubscribeForm(forms.ModelForm):
     class Meta:
         model=Subscribe
         fields='__all__'
+        lable= {'email':__('')}
+
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].label = ""
+        self.fields['email'].widget.attrs['placeholder'] = 'Enter your email'
